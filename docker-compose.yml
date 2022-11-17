@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  web:
+    build:
+      # The 2 commands below is used when there's no outright "Dockerfile" in the project folder
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app
+
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"]
