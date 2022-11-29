@@ -44,7 +44,7 @@ jobs:
           aws elasticbeanstalk create-application-version \
           --application-name docker-react-app \
           --source-bundle S3Bucket="docker-react-app",S3Key="deploy_package.zip" \
-          --version-label "ver-${{ github.sha }}" \
+          --version-label "ver-2" \
           --description "commit-sha-${{ github.sha }}"
 
       - name: Deploy new ElasticBeanstalk Application Version
