@@ -1,4 +1,4 @@
-name: Docker React CI
+name: docker-react-app
 
 on: 
   push:
@@ -37,15 +37,15 @@ jobs:
           aws-region: "us-east-1"
 
       - name: Upload package to S3 bucket
-        run: aws s3 cp deploy_package.zip s3://elasticbeanstalk-us-east-1-154892975187/
+        run: aws s3 cp deploy_package.zip s3://docker-react-app/
 
       - name: Create new ElasticBeanstalk Application Version
         run: |
           aws elasticbeanstalk create-application-version \
-          --application-name React-docker-app \
-          --source-bundle S3Bucket="elasticbeanstalk-us-east-1-154892975187",S3Key="deploy_package.zip" \
+          --application-name docker-react-app \
+          --source-bundle S3Bucket="docker-react-app",S3Key="deploy_package.zip" \
           --version-label "ver-${{ github.sha }}" \
           --description "commit-sha-${{ github.sha }}"
 
       - name: Deploy new ElasticBeanstalk Application Version
-        run: aws elasticbeanstalk update-environment --environment-name Reactdockerapp-env --version-label "ver-${{ github.sha }}"
+        run: aws elasticbeanstalk update-environment --environment-name Dockerreactapp-env --version-label "ver-${{ github.sha }}"
