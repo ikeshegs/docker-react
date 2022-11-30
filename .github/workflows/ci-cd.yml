@@ -1,8 +1,6 @@
 name: docker-react-app
 
 on: 
-  push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -21,6 +19,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Build package
+        run: docker build -t ikeshegs/docker-react -f Dockerfile.dev .
 
       - name: Run test
         run: npm test
