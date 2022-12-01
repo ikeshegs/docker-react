@@ -5,9 +5,9 @@ services:
     build:
       # The 2 commands below is used when there's no outright "Dockerfile" in the project folder
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "80:3000"
     volumes:
       - /app/node_modules
       - .:/app
